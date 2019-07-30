@@ -48,8 +48,8 @@
 
 ## 致谢
 
-- 感谢大法师 @lymzzyh 的支持，在他的帮助下完成了 ST-Link 固件更换测试工作
-- 感谢 @lujji 这位老外的修改教程，大家有兴趣也可以去他的 GItHub 逛逛 https://github.com/lujji
+- 感谢大法师 [@lymzzyh](https://github.com/lymzzyh) 及 小白 [@Zero-Free](https://github.com/Zero-Free) 的支持，在他们的帮助下完成了 ST-Link 固件更换测试工作
+- 感谢 [@lujji](https://github.com/lujji) 这位老外的修改教程，大家有兴趣也可以去他的 GItHub 逛逛 https://github.com/lujji
 
 -----
 
