@@ -38,7 +38,7 @@
 
 如果电脑上没有 Java 运行环境，可以看这里：https://jingyan.baidu.com/article/4e5b3e1909043f91911e2464.html
 
-### STEP2 ：双击打开 STLinkUpgradeHacked.jar
+### STEP2 ：双击打开 STLinkUpgrade/STLinkUpgradeHacked.jar
 
 ![step2](docs/images/step2.png)
 
