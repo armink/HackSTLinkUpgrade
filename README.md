@@ -29,7 +29,11 @@
 
 这两个 exe 都有版本检测功能，将其反编译，找到版本号检测功能，简单修改下，应该也可行。
 
-这里使用的工具是 IDA 7.0，在 [吾爱破解](https://www.52pojie.cn/thread-675251-1-1.html) 上可以下载到绿色版本。将其装载后（这里以 ST-LINK_gdbserver.exe 举例），搜索版本号检测提示相关的字符串，追踪相关代码流程，可以追踪到类似如下图代码：
+这里使用的工具是 IDA 7.0，在 [吾爱破解](https://www.52pojie.cn/thread-675251-1-1.html) 上可以下载到绿色版本。将其装载后（这里以 ST-LINK_gdbserver.exe 举例），搜索版本号检测提示相关的字符串 ( firmware version )，追踪相关代码流程，可以追踪到类似如下图代码：
+
+```c
+The detected STM32 firmware version (V%d.J%d) is compatible with PC software but is not the most recent one
+```
 
 ![cmp_ver](docs/images/cmp_ver.png)
 
@@ -41,7 +45,15 @@
 
  ![hack_gdb_exe](docs/images/hack_gdb_exe.png)
 
-另外一个 exe 的修改方法类似，这里不再赘述。如果不想动手修改，可以看下面的使用章节，直接在 CubeIDE 里替换掉这两个 exe 即可。
+STM32_Programmer_CLI.exe 类似，版本号检测提示相关的字符串 ( firmware version )，追踪相关代码流程，可以追踪到类似代码：
+
+```c
+Old ST-LINK firmware version. Upgrade ST-LINK firmware
+```
+
+![cmp_ver_two](/docs/images/cmp_ver_two.png)
+
+
 
 ### 方案3：修改 ST-Link 升级器软件（部分用户升级失败，不推荐）
 
