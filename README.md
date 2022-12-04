@@ -53,7 +53,22 @@ Old ST-LINK firmware version. Upgrade ST-LINK firmware
 
 ![cmp_ver_two](/docs/images/cmp_ver_two.png)
 
+#### STEP1：找到 STM32CubeIDE 安装路径，确定待替换 exe 路径
 
+也可以直接使用 everything 之类的搜索软件，快速地位下面两个 exe 的路径
+
+- STM32_Programmer_CLI.exe  一般位于 `STM32CubeIDE_1.0.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.cubeprogrammer.win32_1.0.0.201904021149\tools\bin`
+- ST-LINK_gdbserver.exe 一般位于 `STM32CubeIDE_1.0.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.stlink-gdb-server.win32_1.0.0.201904160814\tools\bin`
+
+> 注意：上面路径的日期标识可能与你的实际路径略微不同
+
+#### STEP2：替换 exe 
+
+将项目目录下 `STM32CubeIDE` 对应的 exe 替换过去即可，如果不放心记得提前备份下旧版本 exe 。
+
+此时你的 CubeIDE 即可放心使用类似潘多拉等集成旧版本 ST-Link 的开发板了。
+
+> PS：当前破解的这两个 exe 只能用于固件版本大于 V2J20  的 ST-Link ，暂不支持更低版本
 
 ### 方案3：修改 ST-Link 升级器软件（部分用户升级失败，不推荐）
 
@@ -63,48 +78,27 @@ Old ST-LINK firmware version. Upgrade ST-LINK firmware
 
 虽然是两年前的方法了，但是也适用于笔者用的 STLinkUpgrade V3.3.0 。
 
-### 重要提示
+#### 重要提示
 
 方案 3 的实际测试结果来看，虽然规避了升级器的容量检查，但存在一定几率的升级失败，此时 ST-Link 就会变砖。不过文档末尾也有很简单的救砖教程，升级失败后可以尝试救砖。愿意折腾的还能继续升级，至少我有一个开发板是重复升级了2次，最后也终于成功了。
 
-## 方案 2 如何使用
-
-### STEP1：找到 STM32CubeIDE 安装路径，确定待替换 exe 路径
-
-也可以直接使用 everything 之类的搜索软件，快速地位下面两个 exe 的路径
-
-- STM32_Programmer_CLI.exe  一般位于 `STM32CubeIDE_1.0.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.cubeprogrammer.win32_1.0.0.201904021149\tools\bin`
-- ST-LINK_gdbserver.exe 一般位于 `STM32CubeIDE_1.0.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.stlink-gdb-server.win32_1.0.0.201904160814\tools\bin`
-
-> 注意：上面路径的日期标识可能与你的实际路径略微不同
-
-### STEP2：替换 exe 
-
-将项目目录下 `STM32CubeIDE` 对应的 exe 替换过去即可，如果不放心记得提前备份下旧版本 exe 。
-
-此时你的 CubeIDE 即可放心使用类似潘多拉等集成旧版本 ST-Link 的开发板了。
-
-> PS：当前破解的这两个 exe 只能用于固件版本大于 V2J20  的 ST-Link ，暂不支持更低版本
-
-## 方案 3 如何使用（暂不推荐）
-
-### STEP1：安装 Java 运行环境
+#### STEP1：安装 Java 运行环境
 
 如果电脑上没有 Java 运行环境，可以看这里：https://jingyan.baidu.com/article/4e5b3e1909043f91911e2464.html
 
-### STEP2 ：双击打开 STLinkUpgrade/STLinkUpgradeHacked.jar
+#### STEP2 ：双击打开 STLinkUpgrade/STLinkUpgradeHacked.jar
 
 ![step2](docs/images/step2.png)
 
-### STEP3: 进入升级模式
+#### STEP3: 进入升级模式
 
 ![step3](docs/images/step3.png)
 
-### STEP4：开始升级
+#### STEP4：开始升级
 
 点击 `Upgrade` 即可。
 
-### STEP5：确认升级成功
+#### STEP5：确认升级成功
 
 升级后复位下，打开 Keil MDK 看一下，如果能够正常的找到 ST-Link 并连接芯片，恭喜你，升级成功了。
 
@@ -115,6 +109,26 @@ Old ST-LINK firmware version. Upgrade ST-LINK firmware
 很遗憾，本次升级失败了，不过不要害怕，下面还有救砖教程，保证 ST-Link 还能被还原。
 
 还原后，想继续折腾的也可以重新升级试试，没准这次就成功了。实在不行，那也就只能更换主控了，祝大家好运。
+
+### 方案4：摆烂！使用ST-LINK Utility烧录bin文件到STM32
+
+请到 `STLinkUtility` 文件夹安装 `STM32 ST-LINK Utility v4.0.0 setup.exe` （注意，不可使用其他比v4.0还新的版本）。
+
+先将ST-Link的版本退回到Utility V4.0内置的版本：
+
+![utility-upgrade-framework-1](docs/images/utility-upgrade-framework-1.png)
+
+![utility-upgrade-framework-2](docs/images/utility-upgrade-framework-2.png)
+
+用Keil、IAR、RT-Thread Studio编译出来的bin文件，直接拖入Utility软件中，按照如下图所示的顺序点击即可：
+
+![utility-open-file](docs/images/utility-open-file.png)
+
+![utility-open-bin](docs/images/utility-open-bin.png)
+
+![utility-program-1](docs/images/utility-program-1.png)
+
+![utility-program-2](docs/images/utility-program-2.png)
 
 ## 救砖指南
 
